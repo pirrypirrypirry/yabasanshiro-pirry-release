@@ -6,14 +6,16 @@
 R36S, R35S, K36, RG351 family and other clones running ArkOS). This is a
 build of [Yaba Sanshiro](https://github.com/devmiyax/yabause) 1.20.37 by
 devMiyax, **optimized for performance** on the Mali-G31 GPU and
-Cortex-A35 CPU of these devices: depending on the game, expect
-**10–20 FPS more** than before — in demanding 3D titles that used to
-crawl at ~20 FPS that is close to **twice the frame rate**, now running
-in the mid-30s to 40.
+Cortex-A35 CPU of these devices: depending on the game it runs faster
+than the stock build — roughly **10–15 FPS more** in the titles tested.
+Demanding 3D games (e.g. Sega Rally, Exhumed) that used to run in the
+low-to-mid 20s now reach the **mid-30s to 40**. It stays below a locked
+60 on heavy titles — this is not full-speed Saturn, it is as fast as this
+hardware gets.
 
 ## The optimizations in this build
 
-Weeks of profiling directly on the device (thread sampling, GL call
+Days of profiling directly on the device (thread sampling, GL call
 counting, per-subsystem timing) went into finding where the frames
 actually die. The result:
 
@@ -27,16 +29,9 @@ actually die. The result:
   games toggle clip state per sprite, hundreds of times per frame. This
   build replaces all of it with a single `glScissor` rectangle:
   **+8–9 FPS in Sega Rally from this change alone.**
-- **Shader-bind diet** — a program cache swallows redundant
-  `glUseProgram` calls (up to −85% binds in UMK3). On these devices the
-  Mali blob driver's per-call CPU overhead is the real bottleneck, not
-  GPU horsepower.
-- **Profile-guided optimization (PGO)** — the binary is compiled against
-  execution profiles recorded from real gameplay on the actual device,
-  so the compiler optimizes the code paths Saturn games really hit.
-- **Sound pipeline tuning** — sound-chip synchronization reduced to once
-  per frame and the audio buffer operating point raised; less crackle,
-  and the CPU time saved goes into frames.
+- **Shader-bind diet** — a program cache skips redundant `glUseProgram`
+  calls. On these devices the Mali blob driver's per-call CPU overhead is
+  a real bottleneck, not GPU horsepower.
 - **Hidden CPU eaters removed** — the emulator core polled the system
   clock on every VRAM write and every memory-profile tick; throttled,
   which alone recovered measurable emulation speed.
@@ -45,6 +40,45 @@ actually die. The result:
   boots with its own per-game timing mode.
 - **Fixed config submenus** — menu popups no longer open off-screen at
   640×480.
+
+## This beta — SCSP sound-core change & settings
+
+This build is about **performance / FPS** (see the optimizations above).
+**Sound is still a work in progress and not fixed.** The one sound change
+in this beta: it ships with the alternative SCSP sound-chip core enabled by
+default (`classic scsp: false`), which removes the high-pitched squeal the
+stock core produced on some games' sound effects. The sound still lags
+behind and crackles on demanding games running below full speed — improving
+that is the next task.
+
+**Sound settings** (in `~/.yabasanshiro/default.config`, edit only while
+the emulator is closed — it rewrites the file on exit):
+
+- `"classic scsp": false` — the alternative SCSP core (recommended).
+  `true` is the old core with the squeal.
+- `"sound sync mode": "realtime"` — default. `"cpu"` can clean up the
+  CD-audio (Redbook) track of some games, e.g. **Sega Rally**, at little or
+  no FPS cost — but it helps some games and not others, so try it per game.
+
+**On-screen FPS counter** — shown by default. Toggle it off from the
+in-game menu (temporary), or set it permanently in the config.
+
+**Aspect ratio / borders** — set per game from the in-game menu; the choice
+is saved as `<game name>.config`. A freshly added game shows black borders
+until you set it once.
+
+**Frame skip** (`"frame skip": true`) — keep it on. It is what keeps 3D
+games playable; with it off, demanding titles run in slow motion.
+
+**Vertical / TATE shmups** (`"Rotate screen"`, `"Rotate screen resolution"`)
+— rotate the display for games meant to be played with the screen turned.
+
+Other keys (`"cpu sync per line"`, `"Use compute shader"`, `"jit block
+link"`, `"async vdp1 readback"`, `"Resolution"`) are advanced timing/render
+options — leave them at the defaults shipped in `default.config`.
+
+Config files live in `~/.yabasanshiro/`: `default.config` for the global
+defaults and `<game name>.config` per game.
 
 ## Installation
 
@@ -64,8 +98,8 @@ are stored as `<game name>.config` next to the default config.
 
 ## License
 
-GPL v2 or later, same as upstream Yabause / Yaba Sanshiro. The full
-source code will be published alongside the binary releases.
+GPL v2 or later, same as upstream Yabause / Yaba Sanshiro. The
+corresponding source for this build is available on request.
 
 ## Keywords
 
