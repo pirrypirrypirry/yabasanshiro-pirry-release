@@ -41,6 +41,21 @@ actually die. The result:
 - **Fixed config submenus** — menu popups no longer open off-screen at
   640×480.
 
+## Measured FPS (on the test device — K36/R36S clone, dArkOS)
+
+Full-speed Saturn is 50/60 FPS; none of these hit a locked 60 — that is the
+hardware ceiling of the RK3326, not a bug. These are what the on-screen
+counter shows during play (they vary by scene):
+
+| Game | FPS |
+|---|---|
+| Exhumed | ~40, up to ~50 in simple areas |
+| Sega Rally (racing) | ~32–37 |
+| Astal | ~33 |
+| Thunder Force V | ~32 |
+| Virtua Fighter 2 | ~25–27 (CPU-heavy) |
+| Sonic R | ~20 (one of the heaviest) |
+
 ## This beta — SCSP sound-core change & settings
 
 This build is about **performance / FPS** (see the optimizations above).
