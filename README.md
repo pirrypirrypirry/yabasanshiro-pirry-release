@@ -46,6 +46,35 @@ actually die. The result:
 - **Fixed config submenus** — menu popups no longer open off-screen at
   640×480.
 
+## This beta — sound rework & settings
+
+This is a **beta** build focused on Sega Saturn **sound**. It ships with a
+more accurate sound-chip (SCSP) core enabled by default, which removes the
+high-pitched squeal the stock core produced on some games' sound effects —
+audio is now clearly audible across titles (Exhumed, Thunder Force V,
+Virtua Fighter 2, Sonic R and others were checked on the device). On
+demanding games that still run below full speed the sound can lag behind
+and crackle; that is the next thing being worked on, on top of this base.
+
+**Sound settings** (in `~/.yabasanshiro/default.config`, edit only while
+the emulator is closed — it rewrites the file on exit):
+
+- `"classic scsp": false` — the accurate SCSP core (recommended). `true`
+  is the old core with the squeal.
+- `"sound sync mode": "realtime"` — default. `"cpu"` can clean up the
+  CD-audio (Redbook) track of some games, e.g. **Sega Rally**, at little or
+  no FPS cost — but it helps some games and not others, so try it per game.
+
+**On-screen FPS counter** — shown by default. Toggle it off from the
+in-game menu (temporary), or set it permanently in the config.
+
+**Aspect ratio / borders** — set per game from the in-game menu; the choice
+is saved as `<game name>.config`. A freshly added game shows black borders
+until you set it once.
+
+Config files live in `~/.yabasanshiro/`: `default.config` for the global
+defaults and `<game name>.config` per game.
+
 ## Installation
 
 Works on **Debian-based custom firmwares** for RK3326 handhelds — ArkOS
