@@ -95,21 +95,34 @@ options — leave them at the defaults shipped in `default.config`.
 Config files live in `~/.yabasanshiro/`: `default.config` for the global
 defaults and `<game name>.config` per game.
 
-## Installation
+## Installation (R36S / ArkOS / dArkOS)
 
-Works on **Debian-based custom firmwares** for RK3326 handhelds — ArkOS
-and its clone-device forks like **dArkOS** (tested on a K36/R36S clone
-running dArkOS). Other Debian/Ubuntu-based CFWs should work as long as
-libsdl2, libssl3 and zlib are available.
+On these devices the stock Yaba Sanshiro lives in **`/opt/yabasanshiro/`** and
+is launched by `/usr/local/bin/saturn.sh` when you pick the **standalone**
+Saturn emulator in EmulationStation. This build is a drop-in replacement for
+that binary — no launch-script or `LD_LIBRARY_PATH` changes needed.
 
-1. Download the latest release archive from the
-   [Releases](../../releases) page.
-2. Unpack it on the device (e.g. to `/opt/yabasanshiro`).
-3. Launch a game:
-   `LD_LIBRARY_PATH=./mali ./yabasanshiro -i "/roms/saturn/<game>.chd"`
+1. Unpack the release archive and copy the files onto the device (e.g. to
+   `/home/ark/`).
+2. Back up the stock binary and drop in the optimized one:
+   ```
+   cp /opt/yabasanshiro/yabasanshiro /opt/yabasanshiro/yabasanshiro.bak
+   cp yabasanshiro /opt/yabasanshiro/yabasanshiro
+   chmod +x /opt/yabasanshiro/yabasanshiro
+   ```
+3. Copy the included `default.config` to `~/.yabasanshiro/default.config`
+   (this enables the alternative SCSP sound core and the tuned settings — see
+   above).
+4. In EmulationStation set the Saturn emulator to **Yaba Sanshiro
+   (standalone)** and launch a game normally.
 
-Saturn BIOS (`bios.bin`) goes into `~/.yabasanshiro/`. Per-game settings
-are stored as `<game name>.config` next to the default config.
+Saturn BIOS: `saturn_bios.bin` in your device's `bios` folder (used by the
+`-bios` emulator variant), as in the stock setup. Config files live in
+`~/.yabasanshiro/`: `default.config` plus `<game name>.config` per game.
+
+Other Debian-based RK3326 CFWs work too as long as libsdl2, libssl3 and zlib
+are present; adjust the paths to wherever that firmware keeps its Saturn
+emulator.
 
 ## License
 
