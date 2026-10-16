@@ -34,17 +34,17 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Culdcept (Japan) (Rev B) (20M) | 60 | 61 |
 | D-Xhird (Japan) (2M) | 50 | 25.5 |
 | Darius Gaiden (Europe) | 59.5 | 38.8 |
-| Darius II (Europe) | 59.2 | 60.6 |
+| Darius II (Europe) — **BIOS NEEDED** | 59.2 | 60.6 |
 | Dark Legend (USA) | 59.4 | 54.3 |
 | Dark Savior (Europe) — **NO BIOS (black screen with BIOS)** | 59.3 | 31.5 |
 | Daytona USA (Europe) (2S) | 59.9 | 20.4 |
 | Daytona USA - Championship Circuit Edition (Europe) (Rev A) | 58.9 | 30.2 |
 | Dead or Alive (English) (2M) | 56.7 | 57.7 |
+| Deep Fear (Europe) — **BIOS NEEDED · multi-disc** | 60 | 30 |
 | Die Hard Arcade (Europe) | 58.7 | 27.7 |
 | DoDonPachi (Japan) | 59.5 | 60.5 |
 | Dragon Ball Z - The Legend (English v1.01) | 58.9 | 29.9 |
 | DRAGON_FORCE | 59.7 | 30.4 |
-| Dungeons & Dragons Collection (Japan) (Tower of Doom) | 59.8 | 59.4 |
 | Dungeons & Dragons Collection (Japan) (Tower of Doom) | 59.9 | 60.9 |
 | Elevator Action^2 - Returns (Japan) | 60 | - |
 | Enemy Zero (Europe) — **BIOS NEEDED · multi-disc** | 60.0 | 27.6 |
@@ -58,6 +58,7 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Gouketsuji Ichizoku 3 - Groove on Fight (Japan) | 59.6 | 60.6 |
 | Grandia (English v1.1.1) — **multi-disc** | 38.4 | 19.4 |
 | Guardian Heroes (Europe) | 59.7 | 48.6 |
+| Gungriffon II (Japan) | 60 | 17 |
 | High Velocity - Mountain Racing Challenge (USA) | 59.9 | 20.4 |
 | Highway 2000 (Europe) | 59.2 | 30.2 |
 | House of the Dead, The (Europe) | 49 | 25 |
@@ -98,6 +99,7 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Sega Worldwide Soccer '98 - Club Edition (Europe) (En,Fr,Es) | 59.2 | 30.1 |
 | Sengoku Blade - Sengoku Ace Episode II (Japan) — **multi-disc** | 59.8 | 60.8 |
 | Shienryuu (Japan) | 56.2 | 57.3 |
+| Shining Force III Scenario 3 (English v25.1) | 60 | 30 |
 | SHINING_THE_HOLY_ARK | 59.7 | 29.8 |
 | Shinobi Legions (USA) | 60 | - |
 | Shinobi X - 60Hz Hack (v1.0a) | 60 | - |
@@ -118,9 +120,10 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Three Dirty Dwarves (Europe) | 60 | - |
 | Thunder Force Gold Pack 2 (Japan) (Rev A) | 60 | - |
 | Thunder Force V (Japan) | 56.6 | 47.4 |
-| Time Bokan Series - Bokan to Ippatsu! Doronboo Kanpekiban (J | 60.0 | 61.0 |
+| Time Bokan Series - Bokan to Ippatsu! Doronboo Kanpekiban (Japan) | 60.0 | 61.0 |
 | Ultimate Mortal Kombat 3 (Europe) (Rev A) | 58.1 | 59.2 |
 | Vampire Savior (English) | 59.5 | 60.5 |
+| Vampire Savior (Japan) | 60 | - |
 | Vandal Hearts - Ushinawareta Kodai Bunmei (English v1.5) — **BIOS NEEDED** | 60 | 46 |
 | Victory Boxing (Europe) | 54.2 | 49.2 |
 | Virtua Cop (Europe) (2S) | 59 | 30 |
