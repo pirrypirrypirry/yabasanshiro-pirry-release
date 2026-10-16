@@ -36,6 +36,7 @@ more correct **without breaking anything else**.
 
 - **Select** opens the in-game menu
 - **Select + Start** quits the game
+- In the menu, **A** selects and **B** goes back
 - Your button layout is taken over automatically from EmulationStation on first start
 
 ## In-game menu (press Select)
@@ -72,6 +73,29 @@ Use **Left / Right** to change a value.
 | **Interlace — Half-height backgrounds** *(new)* | **Off by default.** Only for high-resolution (interlaced) games: backgrounds are drawn at half height, which makes these games noticeably faster (Battle Arena Toshinden URA +39 %, D-Xhird +23 % in my tests). Backgrounds look slightly less sharp, characters and 3D are not affected. Takes effect immediately, saved per game. |
 | **Use compute shader** | **On by default in this build.** On: rotating backgrounds are drawn by the GPU. Off: they are drawn by the CPU. All testing was done with it on. |
 | **Reset** | Restart the game |
+| **RetroAchievements** *(new)* | Login / Logout, **Achievements** (list of the running game), **Mode** (Softcore / Hardcore), **Indicators** (On / Off) — see [RetroAchievements](#retroachievements) |
+| **About** *(new)* | Version, credits, licenses, privacy note, links to the source code and this page |
+
+## RetroAchievements
+
+yabasanshiro-pirry supports [RetroAchievements](https://retroachievements.org).
+
+- **Log in** — Select → RetroAchievements → Login, enter user name and password with the on-screen keyboard.
+  The password is used once; after that only a login token is stored on the device
+  (`~/.yabasanshiro/retroachievements.cfg`). **Logout** removes it.
+  You can also create that file yourself with a `username=` and a `password=` line.
+- **Achievements** — Select → RetroAchievements → Achievements shows the list of the running game:
+  unlocked ones first with a green check, locked ones in grey, with points, description and progress.
+- **Hardcore mode** — Mode: Hardcore. Load State is disabled in hardcore. Switching *to* hardcore needs a
+  restart of the game: a red **Reset** button appears next to Mode, press it. Switching back to Softcore works
+  at once. The message at game start shows the mode.
+- **Leaderboards** run in hardcore mode. Live values, challenge and progress indicators appear at the top right —
+  turn that box off with **Indicators: Off** (unlock messages stay).
+- Only disc versions known to RetroAchievements are supported — many European discs are not.
+- **Note:** RetroAchievements accepts hardcore unlocks only from approved emulators. Until this build is approved
+  you will see a "Warning: Unknown Emulator" message in hardcore; softcore works normally.
+- **Privacy:** nothing is sent unless you log in. Then your user name, your password (first login only), the
+  game's disc hash, your unlocks and the game status go to retroachievements.org. No other server, no telemetry.
 
 ## Requirements
 
@@ -79,6 +103,8 @@ Use **Left / Right** to change a value.
 - **dArkOS** (Debian trixie based). The build needs glibc 2.38 or newer —
   check with `ldd --version`. Older ArkOS images (Ubuntu / Debian bookworm)
   are **not** supported yet. (Coming soon) 
+- For RetroAchievements: **libcurl** (`libcurl.so.4`, included in dArkOS). Without it the emulator runs as
+  before, only RetroAchievements is not available.
 
 ## Installation
 
