@@ -115,6 +115,8 @@ yabasanshiro-pirry supports [RetroAchievements](https://retroachievements.org).
 
   **1. Download the right build for your system**
 
+  Both builds are on the [Releases page](https://github.com/pirrypirrypirry/yabasanshiro-pirry-release/releases) — pick the one for your OS:
+
   - **dArkOS**: the dArkOS build (needs glibc 2.38 or newer)
   - **ArkOS**: the ArkOS build (needs glibc 2.29 or newer)
 
