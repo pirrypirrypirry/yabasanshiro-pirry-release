@@ -102,13 +102,62 @@ yabasanshiro-pirry supports [RetroAchievements](https://retroachievements.org).
 - R36S or another RK3326 handheld (R35S, K36 and similar clones)
 - **dArkOS** (Debian trixie based). The build needs glibc 2.38 or newer —
   check with `ldd --version`.
-  **ArkOS** (Ubuntu / Debian bookworm). The build needs glibc 2.29 or newer —
+  **ArkOS** (Ubuntu based). The build needs glibc 2.29 or newer —
     check with `ldd --version`.
   
 - For RetroAchievements: **libcurl** (`libcurl.so.4`, included in dArkOS). Without it the emulator runs as
   before, only RetroAchievements is not available.
 
-## Installation
+
+## How to install (installer script)
+
+  The installer works on **dArkOS** and **ArkOS**. It detects the system by itself.
+
+  **1. Download the right build for your system**
+
+  - **dArkOS**: the dArkOS build (needs glibc 2.38 or newer)
+  - **ArkOS**: the ArkOS build (needs glibc 2.29 or newer)
+
+  Not sure which one you have? Run `ldd --version`.
+
+  **2. Copy two files to the SD card**
+
+  Put `install_yabasanshiro_pirry.sh` and `yabasanshiro-pirry` **next to each other** in
+  `roms/tools/` (on the card with your games).
+
+  **3. Run the installer**
+
+  On the handheld, open **Tools → install_yabasanshiro_pirry**. It can also be started from a
+  terminal: `sudo bash /roms/tools/install_yabasanshiro_pirry.sh`
+
+  Every step is shown with `[ OK ]` or `[FAIL]`. When it is done, EmulationStation restarts by itself.
+
+  **4. Choose the emulator**
+
+  For the Saturn system (or for a single game) pick **standalone-pirry-nobios**,
+  or **standalone-pirry-bios** if you have a BIOS file in `roms/bios/`.
+
+  **What the installer changes**
+
+  - copies the emulator to `/opt/yabasanshiro/yabasanshiro-pirry`
+  - adds a `pirry` entry to `/usr/local/bin/saturn.sh`
+  - adds the two emulators to `/etc/emulationstation/es_systems.cfg`
+
+  The original Yaba Sanshiro stays untouched. Both files are backed up first (`*.backup`), and
+  running the installer again is harmless. A log is saved next to the script
+  (`install_yabasanshiro_pirry.log`).
+
+  **Uninstall:** restore the backups:
+
+  ```bash
+  sudo cp -p /usr/local/bin/saturn.sh.backup /usr/local/bin/saturn.sh
+  sudo cp -p /etc/emulationstation/es_systems.cfg.backup /etc/emulationstation/es_systems.cfg
+  ```
+
+
+
+
+## Manual Installation
 
 **1. Copy the emulator**
 
