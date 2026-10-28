@@ -101,8 +101,10 @@ yabasanshiro-pirry supports [RetroAchievements](https://retroachievements.org).
 
 - R36S or another RK3326 handheld (R35S, K36 and similar clones)
 - **dArkOS** (Debian trixie based). The build needs glibc 2.38 or newer —
-  check with `ldd --version`. Older ArkOS images (Ubuntu / Debian bookworm)
-  are **not** supported yet. (Coming soon) 
+  check with `ldd --version`.
+  **ArkOS** (Ubuntu / Debian bookworm). The build needs glibc 2.29 or newer —
+    check with `ldd --version`.
+  
 - For RetroAchievements: **libcurl** (`libcurl.so.4`, included in dArkOS). Without it the emulator runs as
   before, only RetroAchievements is not available.
 
