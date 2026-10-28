@@ -62,13 +62,14 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Gungriffon II (Japan) | 60 | 17 |
 | High Velocity - Mountain Racing Challenge (USA) | 59.9 | 20.4 |
 | Highway 2000 (Europe) | 59.2 | 30.2 |
+| Horror Tour (Japan) (Rev B) — **BIOS NEEDED** | 60 | 61 |
 | House of the Dead, The (Europe) | 49 | 25 |
 | Hyper Duel (Japan) | 59.7 | 60.7 |
 | In the Hunt (USA) | 60 | 61 |
 | Keio Flying Squadron 2 (Europe) | 59.9 | 60.8 |
 | Keiou Yuugekitai - Katsugeki-hen (Japan) | 60 | - |
 | Kingdom Grandprix (English) | 59.7 | 60.7 |
-| Kyuutenkai - Fantastic Pinball (English Patched) | 60 | 57 |
+| Kyuutenkai - Fantastic Pinball (English Patched) | 60 | 61 |
 | Last Bronx (E) | 37 | 39 |
 | Layer Section (J) | 58.3 | 59.3 |
 | Layer Section II (Japan) | 60 | 61 |
@@ -86,6 +87,7 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Panzer Dragoon II Zwei (Europe) — **BIOS NEEDED** | 59.9 | 30.4 |
 | Panzer Dragoon Saga (Europe) — **BIOS NEEDED (multi-disc)** | 60.0 | 61.0 |
 | Parodius (Europe) | 60 | - |
+| Pastel Muses (Japan) | 60 | - |
 | Planet Joker (Japan) | 59.5 | 30.3 |
 | Power Drift (English) | 59.4 | 30.3 |
 | Princess Crown (Japan) (1M) (English) | 59.4 | 60.4 |
@@ -96,11 +98,13 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | SATURN BOMBERMAN FIGHT | 59.8 | 30.5 |
 | Scud - The Disposable Assassin (USA) | 60 | 61 |
 | Sea Bass Fishing (Europe) (EnFrDe) — **BIOS NEEDED** | 59.8 | 60.8 |
+| Sega Ages - Phantasy Star Collection (Japan) | 60 | 61 |
 | Sega Rally Championship (Europe) (Made in EU) | 60 | 30 |
 | Sega Touring Car Championship (Europe) | 59 | 30 |
 | Sega Worldwide Soccer '98 - Club Edition (Europe) (En,Fr,Es) | 59.2 | 30.1 |
 | Sengoku Blade - Sengoku Ace Episode II (Japan) — **multi-disc** | 59.8 | 60.8 |
-| Shienryuu (Japan) | 56.2 | 57.3 |
+| Shienryuu (Japan) | 60 | 60 |
+| Shining Force III Scenario 2 (English v25.1) | 60 | - |
 | Shining Force III Scenario 3 (English v25.1) | 60 | 30 |
 | SHINING_THE_HOLY_ARK | 59.7 | 29.8 |
 | Shinobi Legions (USA) | 60 | - |
@@ -118,10 +122,11 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Steep Slope Sliders (Europe) | 59.7 | 30.5 |
 | Story of Thor 2, The (Europe) | 59.6 | 60.7 |
 | TAROMARU | 59.9 | 60.9 |
+| Tennis Arena (Japan) | 60 | - |
 | Terry Pratchett's Discworld (Europe) (En,Fr,De,Es,It) | 60 | 61 |
 | Three Dirty Dwarves (Europe) | 60 | - |
 | Thunder Force Gold Pack 2 (Japan) (Rev A) | 60 | - |
-| Thunder Force V (Japan) | 59 | 52 |
+| Thunder Force V (Japan) | 59 | 57 |
 | Time Bokan Series - Bokan to Ippatsu! Doronboo Kanpekiban (Japan) | 60.0 | 61.0 |
 | Ultimate Mortal Kombat 3 (Europe) (Rev A) — **1.6.1: intro videos visible** | 58.1 | 59.2 |
 | Vampire Savior (English) | 59.5 | 60.5 |
@@ -135,4 +140,4 @@ Measured on R36S (dArkOS) in performance mode (CPU 1512 MHz · GPU 600 MHz · RA
 | Virtua Fighter Remix (Europe) | 59.5 | 30.2 |
 | Winter Heat (Europe) | 60.1 | 61.1 |
 | X-Men - Children of the Atom (Europe) (3S) | 59.6 | 60.7 |
-| Zero Divide - The Final Conflict (Japan) | 47.9 | 49.0 |
+| Zero Divide - The Final Conflict (Japan) | 51 | 51 |
