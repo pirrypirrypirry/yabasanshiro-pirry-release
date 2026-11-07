@@ -175,19 +175,44 @@ sudo cp -p /usr/local/bin/saturn.sh /usr/local/bin/saturn.sh.backup
 cp -p /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.backup
 ```
 
-**3. `/usr/local/bin/saturn.sh`** — inside the block `if [[ $1 == *"standalone"* ]]`,
-add this branch next to the other standalone variants:
+**3. `/usr/local/bin/saturn.sh`** — the change depends on your system.
+
+**ArkOS:** insert this directly above the `else` that comes before
+`YABA_BIN="./yabasanshiro"`:
 
 ```bash
   elif [[ $1 == *"pirry"* ]]; then
-    YABA_BIN="./yabasanshiro-pirry"
-    if [[ ! -d "/$directory/saturn/yabasanshiro-pirry" ]]; then
-      mkdir /$directory/saturn/yabasanshiro-pirry
-    fi
+    YABA_BIN="/opt/yabasanshiro/yabasanshiro-pirry"
+    [[ ! -d "/$directory/saturn/yabasanshiro-pirry" ]] && mkdir /$directory/saturn/yabasanshiro-pirry
 ```
 
-In the BIOS check further down, skip the "BIOS missing" warning for this
-build (it finds the BIOS by itself) by adding `&& [[ $1 != *"pirry"* ]]`:
+**dArkOS:** `saturn.sh` has no `YABA_BIN` here, so make three changes:
+
+1. In the two lines that start the emulator, replace `./yabasanshiro` with `"$YABA_BIN"`.
+2. Replace `$1 == "standalone-bios"` with `$1 == *"-bios"*`.
+3. Replace this block:
+
+```bash
+  if [[ ! -d "/$directory/saturn/yabasanshiro" ]]; then
+    mkdir /$directory/saturn/yabasanshiro
+  fi
+```
+
+with this one:
+
+```bash
+  if [[ $1 == *"pirry"* ]]; then
+    YABA_BIN="/opt/yabasanshiro/yabasanshiro-pirry"
+    [[ ! -d "/$directory/saturn/yabasanshiro-pirry" ]] && mkdir /$directory/saturn/yabasanshiro-pirry
+  else
+    YABA_BIN="./yabasanshiro"
+    [[ ! -d "/$directory/saturn/yabasanshiro" ]] && mkdir /$directory/saturn/yabasanshiro
+  fi
+```
+
+**Both systems:** in the first BIOS check, inside the `standalone` block, skip
+the "BIOS missing" warning for this build (it finds the BIOS by itself) by
+adding `&& [[ $1 != *"pirry"* ]]`:
 
 ```bash
     if [[ ! -f "/$directory/bios/saturn_bios.bin" ]] && [[ $1 != *"pirry"* ]]; then
@@ -196,7 +221,7 @@ build (it finds the BIOS by itself) by adding `&& [[ $1 != *"pirry"* ]]`:
 Check the syntax: `bash -n /usr/local/bin/saturn.sh` (no output = OK).
 
 **4. `/etc/emulationstation/es_systems.cfg`** — add two emulators to the
-`<emulators>` section of the Saturn system:
+`<emulators>` section of the Saturn system, directly after `<emulators>`:
 
 ```xml
 			<emulator name="standalone-pirry-nobios">
@@ -207,6 +232,11 @@ Check the syntax: `bash -n /usr/local/bin/saturn.sh` (no output = OK).
 
 The names must contain `standalone` and `pirry`, plus `-bios` or `-nobios` —
 `saturn.sh` decides by the name. Check: `grep -c 'standalone-pirry' /etc/emulationstation/es_systems.cfg` → `2`.
+
+If these files exist in `/etc/emulationstation/`, back them up and make the same
+change there too: `es_systems.cfg.dual`, `es_systems.dual` (two Saturn sections
+each, add the lines to both), `es_systems.cfg.sd1`, `es_systems.cfg.sd2`,
+`es_systems.sd1`, `es_systems.sd2`.
 
 **5. Restart EmulationStation** (`sudo systemctl restart emulationstation`) and
 pick **standalone-pirry-nobios** or **standalone-pirry-bios** as the emulator —
