@@ -143,17 +143,19 @@ yabasanshiro-pirry supports [RetroAchievements](https://retroachievements.org).
 
   - copies the emulator to `/opt/yabasanshiro/yabasanshiro-pirry`
   - adds a `pirry` entry to `/usr/local/bin/saturn.sh`
-  - adds the two emulators to `/etc/emulationstation/es_systems.cfg`
+  - adds the two emulators to `/etc/emulationstation/es_systems.cfg` and, if present, to the
+    templates `es_systems.cfg.dual`, `.cfg.sd1`, `.cfg.sd2`, `es_systems.dual`, `.sd1`, `.sd2`
+    (some systems copy one of them over `es_systems.cfg` when the SD card setting changes)
 
-  The original Yaba Sanshiro stays untouched. Both files are backed up first (`*.backup`), and
-  running the installer again is harmless. A log is saved next to the script
-  (`install_yabasanshiro_pirry.log`).
+  The original Yaba Sanshiro stays untouched. Every changed file is backed up first (`*.backup`),
+  and running the installer again is harmless. After a system update, simply run it again.
+  A log is saved next to the script (`install_yabasanshiro_pirry.log`).
 
   **Uninstall:** restore the backups:
 
   ```bash
   sudo cp -p /usr/local/bin/saturn.sh.backup /usr/local/bin/saturn.sh
-  sudo cp -p /etc/emulationstation/es_systems.cfg.backup /etc/emulationstation/es_systems.cfg
+  for f in /etc/emulationstation/es_systems*.backup; do sudo cp -p "$f" "${f%.backup}"; done
   ```
 
 

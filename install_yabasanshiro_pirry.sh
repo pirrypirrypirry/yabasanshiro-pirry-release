@@ -45,16 +45,22 @@ MISSING="$(ldd "$DEST_BIN" 2>&1 | grep 'not found')"
 
 # ---------- Step 2: backups ----------
 step "Step 2/5: Backing up configuration files"
-if [ -f "$SATURN_SH.backup" ]; then
+# A file without our changes is the current original (a system update may have replaced it):
+# it becomes the new backup. Only a file this installer patched is rebuilt from its backup.
+PATCH_MARK='YABA_BIN="/opt/yabasanshiro/yabasanshiro-pirry"'
+if [ -f "$SATURN_SH.backup" ] && grep -qF "$PATCH_MARK" "$SATURN_SH" 2>/dev/null; then
   step "Restoring clean saturn.sh from backup"
   cp -p "$SATURN_SH.backup" "$SATURN_SH" || fail "Could not restore saturn.sh"
   ok "Original saturn.sh restored"
 fi
 [ -f "$SATURN_SH" ] || fail "$SATURN_SH not found"
 [ -f "$ES_CFG" ]    || fail "$ES_CFG not found"
-[ -f "$SATURN_SH.backup" ] || cp -p "$SATURN_SH" "$SATURN_SH.backup"
+grep -qF "$PATCH_MARK" "$SATURN_SH" || cp -p "$SATURN_SH" "$SATURN_SH.backup"
 for C in "$ES_CFG" $ES_VARIANTS; do
-  [ -f "$C" ] && { [ -f "$C.backup" ] || cp -p "$C" "$C.backup"; }
+  [ -f "$C" ] || continue
+  if ! grep -q 'standalone-pirry' "$C" || [ ! -f "$C.backup" ]; then
+    cp -p "$C" "$C.backup"
+  fi
 done
 ok "Backups ready (*.backup)"
 
