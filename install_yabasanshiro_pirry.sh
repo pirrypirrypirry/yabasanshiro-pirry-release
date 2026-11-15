@@ -14,7 +14,11 @@ SRC_BIN="$SCRIPT_DIR/yabasanshiro-pirry"
 DEST_DIR="/opt/yabasanshiro"
 DEST_BIN="$DEST_DIR/yabasanshiro-pirry"
 SATURN_SH="/usr/local/bin/saturn.sh"
-ES_CFG="/etc/emulationstation/es_systems.cfg"
+ES_DIR="/etc/emulationstation"
+ES_CFG="$ES_DIR/es_systems.cfg"
+# Some systems copy one of these templates over es_systems.cfg (e.g. at boot or when the
+# SD card setup changes). They are patched as well, otherwise the pirry entries disappear again.
+ES_VARIANTS="$ES_DIR/es_systems.cfg.dual $ES_DIR/es_systems.cfg.sd1 $ES_DIR/es_systems.cfg.sd2 $ES_DIR/es_systems.dual $ES_DIR/es_systems.sd1 $ES_DIR/es_systems.sd2"
 
 # Started from the Tools menu: show the output on the screen. Always keep a log next to the script.
 LOG="$SCRIPT_DIR/install_yabasanshiro_pirry.log"
@@ -49,7 +53,7 @@ fi
 [ -f "$SATURN_SH" ] || fail "$SATURN_SH not found"
 [ -f "$ES_CFG" ]    || fail "$ES_CFG not found"
 [ -f "$SATURN_SH.backup" ] || cp -p "$SATURN_SH" "$SATURN_SH.backup"
-for C in "$ES_CFG" "$ES_CFG.dual"; do
+for C in "$ES_CFG" $ES_VARIANTS; do
   [ -f "$C" ] && { [ -f "$C.backup" ] || cp -p "$C" "$C.backup"; }
 done
 ok "Backups ready (*.backup)"
@@ -123,8 +127,14 @@ fi
 
 # ---------- Step 4: patch es_systems.cfg ----------
 step "Step 4/5: Patching $ES_CFG"
-for C in "$ES_CFG" "$ES_CFG.dual"; do
+for C in "$ES_CFG" $ES_VARIANTS; do
   [ -f "$C" ] || continue
+  # es_systems.cfg must be patched; a template that cannot be patched only gives a warning
+  if [ "$C" = "$ES_CFG" ]; then bad=fail; else bad=warn; fi
+  if ! grep -q '<name>saturn</name>' "$C"; then
+    echo "$(basename "$C") has no Saturn section, skipping."
+    continue
+  fi
   if grep -q 'standalone-pirry' "$C"; then
     echo "$(basename "$C") already patched, skipping."
     sleep 1
@@ -140,19 +150,27 @@ for C in "$ES_CFG" "$ES_CFG.dual"; do
         insat=0; done=1
       }
       END { if (!done) exit 3 }
-    ' "$C.backup" > "$C.new" \
-      || { rm -f "$C.new"; fail "Could not find the Saturn <emulators> section in $(basename "$C")"; }
+    ' "$C.backup" > "$C.new"
+    if [ $? -ne 0 ]; then
+      rm -f "$C.new"
+      MSG="Could not find the Saturn <emulators> section in $(basename "$C")"
+      [ "$bad" = fail ] && fail "$MSG"
+      echo "[WARN] $MSG, left unchanged"; sleep 3
+      continue
+    fi
     mv "$C.new" "$C"
     ok "Emulators added to $(basename "$C")"
   fi
-  # es_systems.cfg.dual has one Saturn section per SD card: 2 entries each
+  # the .dual files have one Saturn section per SD card: 2 entries each
   WANT=$(( 2 * $(grep -c '<name>saturn</name>' "$C") ))
   COUNT="$(grep -c 'standalone-pirry' "$C")"
   if [ "$COUNT" -eq "$WANT" ]; then
     ok "Verification passed ($COUNT entries found in $(basename "$C"))"
   else
     cp -p "$C.backup" "$C"
-    fail "Expected $WANT entries in $(basename "$C"), found $COUNT. Original restored"
+    MSG="Expected $WANT entries in $(basename "$C"), found $COUNT. Original restored"
+    [ "$bad" = fail ] && fail "$MSG"
+    echo "[WARN] $MSG"; sleep 3
   fi
 done
 
